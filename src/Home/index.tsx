@@ -59,7 +59,7 @@ const addToCart = (crop: any) => {
           <li className="hover:text-green-200 cursor-pointer">Contact</li>
           <button
                 onClick={navigateToCart}
-                className="relative bg-white text-green-700 px-3 py-1 rounded"
+                className="relative bg-white text-green-700 px-3 py-1 rounded cursor-pointer"
             >
                 🛒
                 {cart.length > 0 && (
@@ -79,7 +79,7 @@ const addToCart = (crop: any) => {
         <p className="text-lg text-green-800 mb-6">
           Connecting farmers and buyers across Nigeria
         </p>
-        <button className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800">
+        <button className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 cursor-pointer">
           Get Started
         </button>
       </header>
@@ -99,7 +99,7 @@ const addToCart = (crop: any) => {
                 filter === type
                 ? "bg-green-700 text-white"
                 : "bg-white text-green-700 border border-green-700"
-            } hover:bg-green-600 hover:text-white transition`}
+            } hover:bg-green-600 hover:text-white transition cursor-pointer`}
             onClick={() => {
                 setFilter(type);
                 setShowAll(false); // Reset to 4 when filter changes
@@ -127,7 +127,7 @@ const addToCart = (crop: any) => {
                 <p className="text-green-700 mt-2">₦{crop.price.toLocaleString()}</p>
                 <p className="text-green-600 mt-1 mb-3 text-sm">{crop.type}</p>
                 <button
-                className="mt-auto w-full py-2 bg-green-700 text-white rounded hover:bg-green-800"
+                className="mt-auto w-full py-2 bg-green-700 text-white rounded hover:bg-green-800 cursor-pointer"
                 onClick={() => addToCart(crop)}
                 >
                 Add to Cart
@@ -141,7 +141,7 @@ const addToCart = (crop: any) => {
         {filteredCrops.length > 4 && (
         <div className="flex justify-center mt-8">
             <button
-            className="px-6 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition"
+            className="px-6 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition cursor-pointer"
             onClick={() => setShowAll(!showAll)}
             >
             {showAll ? "Show Less" : "See More"}

@@ -58,7 +58,7 @@ const Cart = ({ cart, setCart }: Props) => {
         <h1 className="text-3xl font-bold text-green-900">Your Cart</h1>
         <button
           onClick={() => navigate("/")}
-          className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+          className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition cursor-pointer"
         >
           ← Back to Home
         </button>
@@ -76,7 +76,7 @@ const Cart = ({ cart, setCart }: Props) => {
                 <p className="font-bold text-green-800">{item.name}</p>
                 <button
                     onClick={() => removeItem(index)}
-                    className="text-red-600 hover:text-red-800"
+                    className="text-red-600 hover:text-red-800 cursor-pointer"
                     title="Remove item"
                 >
                     🗑️
@@ -89,14 +89,14 @@ const Cart = ({ cart, setCart }: Props) => {
                 <div className="flex items-center gap-2">
                     <button
                     onClick={() => updateQuantity(index, -1)}
-                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
                     >
                     -
                     </button>
                     <span className="px-3 py-1 border rounded">{item.quantity ?? 1}</span>
                     <button
                     onClick={() => updateQuantity(index, 1)}
-                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
+                    className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 cursor-pointer"
                     >
                     +
                     </button>
