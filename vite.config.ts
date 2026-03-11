@@ -9,7 +9,7 @@ export default defineConfig(({mode}) => {
       hmr: true,
       open: true,
     },
-    base: '/GrowthPlusFarm/',
+    base: mode === "production" ? "/GrowthPlusFarm/" : "/",
     plugins: [react()],
   }
 })
