@@ -53,7 +53,7 @@ const Cart = ({ cart, setCart }: Props) => {
   );
 
   return (
-    <div className="min-h-screen bg-green-50 px-30 py-10">
+    <div className="min-h-screen bg-green-50 lg:px-30 p-3 py-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-green-900">Your Cart</h1>
         <button
