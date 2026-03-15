@@ -16,13 +16,23 @@ const Home = ({ cart, setCart }: HomeProps) => {
   // Crop data
   const allCrops = [
     { name: "Maize", price: 1200, img: "https://via.placeholder.com/150", type: "Grain" },
+    { name: "Lemon", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
     { name: "Rice", price: 2500, img: "https://via.placeholder.com/150", type: "Grain" },
     { name: "Cassava", price: 800, img: "https://via.placeholder.com/150", type: "Root" },
     { name: "Tomatoes", price: 600, img: "https://via.placeholder.com/150", type: "Vegetable" },
+    { name: "Mango", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
+    { name: "Habanero Pepper", price: 600, img: "https://via.placeholder.com/150", type: "Vegetable" },
     { name: "Yam", price: 1500, img: "https://via.placeholder.com/150", type: "Root" },
     { name: "Peppers", price: 900, img: "https://via.placeholder.com/150", type: "Vegetable" },
     { name: "Oranges", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
+    { name: "Carrot", price: 1200, img: "https://via.placeholder.com/150", type: "Vegetable" },
     { name: "Apples", price: 1200, img: "https://via.placeholder.com/150", type: "Fruit" },
+    { name: "Chilli pepper", price: 1200, img: "https://via.placeholder.com/150", type: "Vegetable" },
+    { name: "Cucumber", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
+    { name: "Bell pepper", price: 1200, img: "https://via.placeholder.com/150", type: "Vegetable" },
+    { name: "Beans", price: 2500, img: "https://via.placeholder.com/150", type: "Grain" },
+    { name: "Pawpaw", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
+    { name: "Watermelon", price: 700, img: "https://via.placeholder.com/150", type: "Fruit" },
   ];
 
   const [filter, setFilter] = useState("All");
@@ -95,7 +105,7 @@ const addToCart = (crop: any) => {
         Welcome to GrowthPlusFarm
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-green-800 mb-6 max-w-xl">
-        Connecting farmers and buyers across Nigeria
+        At Growthplusfarms, we are into production of Market Garden crops and Agroforestry which are produced organically, and connecting farmers and buyers across Nigeria
         </p>
         <button className="px-4 sm:px-6 py-2 sm:py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 cursor-pointer">
         Get Started
@@ -195,6 +205,11 @@ const addToCart = (crop: any) => {
     {/* Footer */}
     <footer className="bg-green-700 text-white py-4 sm:py-6 text-center text-sm sm:text-base">
         <p>© {currentYear} GrowthPlusFarm. All rights reserved.</p>
+        <p>
+          <a href="tel:+2348051180767" target="_blank" rel="noopener noreferrer">📞 Call Us</a> &nbsp;&nbsp;&nbsp;
+          <a href="https://wa.me/2348060945071" target="_blank" rel="noopener noreferrer">💬 WhatsApp Us</a> &nbsp;&nbsp;&nbsp;
+          <a href="mailto:growthplusfarms@gmail.com" target="_blank" rel="noopener noreferrer">📧 Email Us</a>
+        </p>
     </footer>
    </div>
   );
