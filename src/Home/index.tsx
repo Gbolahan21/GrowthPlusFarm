@@ -82,9 +82,6 @@ const addToCart = (crop: any) => {
         <span className="font-bold text-lg sm:text-xl">GrowthPlusFarm</span>
         </div>
         <ul className="flex flex-wrap gap-4 sm:gap-6 items-center">
-        {["Home", "Crops", "Tips", "Contact"].map((item) => (
-            <li key={item} className="hover:text-green-200 cursor-pointer text-sm sm:text-base">{item}</li>
-        ))}
         <button
             onClick={navigateToCart}
             className="relative bg-white text-green-700 px-3 py-1 rounded cursor-pointer text-sm sm:text-base"
@@ -123,7 +120,7 @@ const addToCart = (crop: any) => {
         {["All", "Grain", "Vegetable", "Root", "Fruit"].map((type) => (
             <button
             key={type}
-            className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base ${
+            className={`px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-sm sm:text-base cursor-pointer ${
                 filter === type
                 ? "bg-green-700 text-white"
                 : "bg-white text-green-700 border border-green-700"
