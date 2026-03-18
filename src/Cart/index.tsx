@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 type CartItem = {
   name: string;
@@ -12,9 +13,11 @@ type CartItem = {
 type Props = {
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>; 
 };
 
-const Cart = ({ cart, setCart }: Props) => {
+const Cart = ({ cart, setCart, isLoggedIn, setIsLoggedIn }: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const item = location.state?.item;
@@ -29,6 +32,15 @@ const Cart = ({ cart, setCart }: Props) => {
       });
     }
   }, [item, setCart]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toast.error("Please log in first to access your cart!");
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (!isLoggedIn) return null;
 
   // Update quantity
   const updateQuantity = (index: number, delta: number) => {
@@ -52,6 +64,14 @@ const Cart = ({ cart, setCart }: Props) => {
     0
   );
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
+    setCart([]); 
+    toast.success("Logged out successfully!");
+    navigate("/login");
+  };
+
   return (
     <div className="min-h-screen bg-green-50 lg:px-30 p-3 py-10">
       <div className="flex justify-between items-center mb-6">
@@ -61,6 +81,12 @@ const Cart = ({ cart, setCart }: Props) => {
           className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition cursor-pointer"
         >
           ← Back to Home
+        </button>
+        <button
+          onClick={handleLogout}
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition cursor-pointer"
+        >
+          Logout
         </button>
       </div>
 

@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { notification } from "../helpers/notification";
+import toast from "react-hot-toast";
 
 import GrowthPlusLogo from "../assets/images.jpeg";
 
@@ -61,9 +61,9 @@ const addToCart = (crop: any) => {
 
   if (!exists) {
     setCart((prev) => [...prev, crop]);
-    notification.success(`${crop.name} has been added to your cart!`);
+    toast.success(`${crop.name} has been added to your cart!`);
   } else {
-    notification.error(`${crop.name} is already in your cart!`);
+    toast.error(`${crop.name} is already in your cart!`);
   }
 };
 
