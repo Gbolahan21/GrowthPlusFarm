@@ -28,7 +28,7 @@ const Cart = ({ cart, setCart }: Props) => {
         return prev;
       });
     }
-  }, [item]);
+  }, [item, setCart]);
 
   // Update quantity
   const updateQuantity = (index: number, delta: number) => {
@@ -106,8 +106,13 @@ const Cart = ({ cart, setCart }: Props) => {
             </div>
             ))}
 
-          <div className="text-right font-bold mt-4 text-green-900">
-            Total: ₦{total.toLocaleString()}
+          <div className="text-right mt-6">
+            <button
+              onClick={() => navigate("/checkout", { state: { cart, total } })}
+              className="bg-green-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-800 transition cursor-pointer"
+            >
+              Checkout: ₦{total.toLocaleString()}
+            </button>
           </div>
         </div>
       )}
