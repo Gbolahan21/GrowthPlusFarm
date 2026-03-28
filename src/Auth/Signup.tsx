@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
+import GrowthPlusLogo from "../assets/images.jpeg";
+
 type SignupProps = {
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -30,53 +32,65 @@ const Signup = ({ setIsLoggedIn }: SignupProps) => {
     navigate("/login");
   };
 
+  const navHome = () => {
+    navigate('/')
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50">
-      <form
-        onSubmit={handleSignup}
-        className="bg-white p-8 rounded-xl shadow-md w-[400px]"
-      >
-        <h1 className="text-2xl font-bold text-green-700 mb-6">Sign Up</h1>
-
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full border p-3 rounded mb-4 cursor-pointer"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-3 rounded mb-4 cursor-pointer"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          className="w-full border p-3 rounded mb-4 cursor-pointer"
-          value={confirm}
-          onChange={(e) => setConfirm(e.target.value)}
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-green-700 text-white py-3 rounded-lg font-bold hover:bg-green-800 transition cursor-pointer"
+    <>
+      <nav className="bg-green-700 text-white p-4 sm:px-6 md:px-12 lg:px-20 flex flex-wrap justify-between items-center gap-4">
+        <div className="flex items-center gap-2 cursor-pointer" onClick={navHome}>
+          <img src={GrowthPlusLogo} alt="GrowthPlusFarm Logo" className="h-10 w-10 rounded-full" />
+          <span className="font-bold text-lg sm:text-xl">GrowthPlusFarm</span>
+        </div>
+      </nav>
+      <div className="min-h-screen flex items-center justify-center bg-green-50">
+        <form
+          onSubmit={handleSignup}
+          className="bg-white p-8 rounded-xl shadow-md w-[400px]"
         >
-          Sign Up
-        </button>
+          <h1 className="text-2xl font-bold text-green-700 mb-6">Sign Up</h1>
 
-        <p className="text-sm mt-4 text-gray-500">
-          Already have an account?{" "}
-          <Link to="/login" className="text-green-700 font-bold cursor-pointer">
-            Log In
-          </Link>
-        </p>
-      </form>
-    </div>
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full border p-3 rounded mb-4 cursor-pointer"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full border p-3 rounded mb-4 cursor-pointer"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            />
+
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="w-full border p-3 rounded mb-4 cursor-pointer"
+            value={confirm}
+            onChange={(e) => setConfirm(e.target.value)}
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-green-700 text-white py-3 rounded-lg font-bold hover:bg-green-800 transition cursor-pointer"
+          >
+            Sign Up
+          </button>
+
+          <p className="text-sm mt-4 text-gray-500">
+            Already have an account?{" "}
+            <Link to="/login" className="text-green-700 font-bold cursor-pointer">
+              Log In
+            </Link>
+          </p>
+        </form>
+      </div>
+    </>
   );
 };
 

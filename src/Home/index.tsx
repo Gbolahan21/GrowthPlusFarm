@@ -99,13 +99,13 @@ const addToCart = (crop: any) => {
     {/* Hero Section */}
     <header className="bg-green-100 flex flex-col items-center justify-center text-center py-16 sm:py-20 px-4 sm:px-6 md:px-12">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-900 mb-4">
-        Welcome to GrowthPlusFarm
+            Welcome to GrowthPlusFarm
         </h1>
         <p className="text-base sm:text-lg md:text-xl text-green-800 mb-6 max-w-xl">
-        At Growthplusfarms, we are into production of Market Garden crops and Agroforestry which are produced organically, and connecting farmers and buyers across Nigeria
+            At Growthplusfarms, we are into production of Market Garden crops and Agroforestry which are produced organically, and connecting farmers and buyers across Nigeria
         </p>
-        <button className="px-4 sm:px-6 py-2 sm:py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 cursor-pointer">
-        Get Started
+        <button className="px-4 sm:px-6 py-2 sm:py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 cursor-pointer" onClick={() => navigate("/signup")}>
+            Get Started
         </button>
     </header>
 

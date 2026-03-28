@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { FaLessThan } from "react-icons/fa6";
 
 type CartItem = {
   name: string;
@@ -74,14 +75,14 @@ const Cart = ({ cart, setCart, isLoggedIn, setIsLoggedIn }: Props) => {
 
   return (
     <div className="min-h-screen bg-green-50 lg:px-30 p-3 py-10">
-      <div className="flex justify-between items-center mb-6">
+      <button
+        onClick={() => navigate("/")}
+        className="cursor-pointer"
+      >
+        <FaLessThan />
+      </button>
+      <div className="flex justify-between items-center mb-6 mt-6">
         <h1 className="text-3xl font-bold text-green-900">Your Cart</h1>
-        <button
-          onClick={() => navigate("/")}
-          className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition cursor-pointer"
-        >
-          ← Back to Home
-        </button>
         <button
           onClick={handleLogout}
           className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition cursor-pointer"
