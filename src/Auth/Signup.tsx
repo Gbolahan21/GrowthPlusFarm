@@ -1,35 +1,67 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import GrowthPlusLogo from "../assets/images.jpeg";
 
-type SignupProps = {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Signup = ({ setIsLoggedIn }: SignupProps) => {
+const Signup = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!email || !password || !confirm) {
+    if (!firstName || !lastName || !email || !password || !confirm) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    if (password !== confirm) {
+    if (password.trim() !== confirm.trim()) {
       toast.error("Passwords do not match");
       return;
     }
 
-    setIsLoggedIn(true);
-    toast.success("Account created successfully!");
-    navigate("/login");
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:2000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.error || "Registration failed");
+        return;
+      }
+
+      toast.success("Account created successfully!");
+
+      navigate("/login");
+    } catch (error) {
+      toast.error("Server error. Try again later.");
+      console.error(error);
+    }
   };
 
   const navHome = () => {
@@ -52,28 +84,78 @@ const Signup = ({ setIsLoggedIn }: SignupProps) => {
           <h1 className="text-2xl font-bold text-green-700 mb-6">Sign Up</h1>
 
           <input
+            type="text"
+            placeholder="First Name"
+            className="w-full border p-3 rounded mb-4"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="w-full border p-3 rounded mb-4"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+
+          <input
             type="email"
             placeholder="Email"
-            className="w-full border p-3 rounded mb-4 cursor-pointer"
+            className="w-full border p-3 rounded mb-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full border p-3 rounded mb-4 cursor-pointer"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+          <div className="relative mb-4">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border p-3 rounded pr-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            className="w-full border p-3 rounded mb-4 cursor-pointer"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-          />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-4.5 text-gray-500 cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <div className="relative mb-4">
+            <input
+              type={showConfirm ? "text" : "password"}
+              placeholder="Confirm Password"
+              className="w-full border p-3 rounded mb-4"
+              value={confirm}
+              onChange={(e) => {
+                setConfirm(e.target.value);
+                
+                if (password && e.target.value !== password) {
+                  setPasswordError("Passwords do not match");
+                } else {
+                  setPasswordError("");
+                }
+              }}
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowConfirm((prev) => !prev)}
+              className="absolute right-3 top-4.5 text-gray-500 cursor-pointer"
+            >
+              {showConfirm ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+
+          <div>
+            {passwordError && (
+              <p className="text-red-500 text-sm mb-2">{passwordError}</p>
+            )}
+          </div>
 
           <button
             type="submit"

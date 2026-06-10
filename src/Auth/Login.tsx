@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 
 import GrowthPlusLogo from "../assets/images.jpeg";
@@ -12,8 +13,9 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -21,11 +23,38 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
       return;
     }
 
-    setIsLoggedIn(true);
-    toast.success ("Logged in successfully!");
-    navigate("/cart");
-  };
+    try {
+      const response = await fetch("http://localhost:2000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.error || "Login failed");
+        return;
+      }
+
+      toast.success("Logged in successfully!");
+
+      // store user (optional but recommended)
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      setIsLoggedIn(true);
+
+      navigate("/cart");
+    } catch (error) {
+      console.error(error);
+      toast.error("Server error. Try again later.");
+    }
+  };
   const navHome = () => {
     navigate('/')
   }
@@ -48,18 +77,28 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
           <input
             type="email"
             placeholder="Email"
-            className="w-full border p-3 rounded mb-4 cursor-pointer"
+            className="w-full border p-3 rounded mb-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
 
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full border p-3 rounded mb-4 cursor-pointer"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+          <div className="relative mb-4">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="w-full border p-3 rounded pr-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-4.5 text-gray-500 cursor-pointer"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
 
           <button
             type="submit"
